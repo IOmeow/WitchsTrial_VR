@@ -2,13 +2,20 @@ using UnityEngine;
 using System.Collections;
 using System.Text;
 using UnityEngine.Networking;
+using System.IO;
 
 public class SentimentAnalysis : MonoBehaviour
 {
-    private string apiKey = "AIzaSyAjiZt-cB0607edQnoTOGJEcxRrLPgD8mc"; // Your Google Cloud API key
+    private string apiKey;
     private string url = "https://language.googleapis.com/v1/documents:analyzeSentiment?key="; // Google Cloud Natural Language API endpoint
     private string response = "";
     float magnitude, score;
+
+    void Start(){
+        var path = Path.Combine(Application.persistentDataPath, "apiKey.txt");
+        if(File.Exists(path))apiKey = File.ReadAllText(path);
+        else Debug.Log("No API Key");
+    }
 
     public void AnalyzeSentiment(string text)
     {

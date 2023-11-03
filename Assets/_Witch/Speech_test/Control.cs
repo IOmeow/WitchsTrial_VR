@@ -15,6 +15,7 @@ public class Control : MonoBehaviour
     string script = "";
     float score, magnitude;
 
+    string googleApiKey;
     void Start()
     {
         SpeechToText = gameObject.GetComponent<SpeechToText>();

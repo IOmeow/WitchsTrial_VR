@@ -3,7 +3,12 @@ guid: ef8af8edbecd7f74192a6fa17a20f4dd
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cauldronMain_Shader
+    second: {fileID: 2100000, guid: b99798aada128c6408fbf99f9a96c1b6, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

@@ -5,9 +5,15 @@ using System.IO;
 
 public class SpeechToText : MonoBehaviour
 {
-    private string googleApiKey = "AIzaSyAjiZt-cB0607edQnoTOGJEcxRrLPgD8mc";
+    private string googleApiKey;
     private string response = "";
     private string transcript = "";
+
+    void Start(){
+        var path = Path.Combine(Application.persistentDataPath, "apiKey.txt");
+        if(File.Exists(path))googleApiKey = File.ReadAllText(path);
+        else Debug.Log("No API Key");
+    }
 
     public void Recognize()
     {
