@@ -5,9 +5,7 @@ using UnityEngine;
 public class MagicController : MonoBehaviour
 {
     Control speech;
-    public GameObject TrackHint;
-    private ParticleSystem p_hint;
-    private ParticleSystem p_recording;
+    MagicRotate magicHint;
 
     private GameObject trail;
     private ParticleSystem glow;
@@ -18,29 +16,18 @@ public class MagicController : MonoBehaviour
     {
         speech = GameObject.Find("=== System ===").GetComponent<Control>();
         sound = GameObject.Find("=== System ===").GetComponent<SoundControl>();
+        magicHint = GameObject.Find("Magic_hint").GetComponent<MagicRotate>();
 
-        p_hint = TrackHint.transform.GetChild(0).gameObject.GetComponent<ParticleSystem>();
-        p_recording = TrackHint.transform.GetChild(1).gameObject.GetComponent<ParticleSystem>();
-
-        p_hint.Play();
-
+        glow = GameObject.Find("glow").GetComponent<ParticleSystem>();
         trail = GameObject.Find("trail");
         trail.SetActive(false);
-        glow = GameObject.Find("glow").GetComponent<ParticleSystem>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.H)){
-            pRecordFinish();
-            p_hint.Play();
-        }
-        if(Input.GetKeyDown(KeyCode.J)){
-            p_hint.Stop();
-            pRecording();
-        }
-
+        if(Input.GetKeyDown(KeyCode.M))startHint();
+        if(Input.GetKeyDown(KeyCode.N))stopHint();
     }
     
     int t = 0;
@@ -69,9 +56,6 @@ public class MagicController : MonoBehaviour
             MagicStart = true;
             speech.startRecord();
 
-            p_hint.Stop();
-            pRecording();
-
             glow.Play();
             sound.playMagigSE();
         }
@@ -81,9 +65,6 @@ public class MagicController : MonoBehaviour
         if(other.name == "StayTarget" && MagicStart){
             MagicStart=false;
             speech.stopRecord();
-
-            pRecordFinish();
-            p_hint.Play();
 
             InvokeRepeating("RandomGlowColor", 0.1f, 1f);
             trail.SetActive(false);
@@ -97,19 +78,6 @@ public class MagicController : MonoBehaviour
         if(!MagicStart)trail.SetActive(false);;
     }
 
-    void pRecording(){
-        Color nowColor;
-        ColorUtility.TryParseHtmlString("#AFFFB257", out nowColor);
-        p_recording.startColor = nowColor;
-        p_recording.Play();
-    }
-    void pRecordFinish(){
-        p_recording.Stop();
-        Color nowColor;
-        ColorUtility.TryParseHtmlString("#FFB7AF57", out nowColor);
-        p_recording.startColor = nowColor;
-    }
-
     void RandomGlowColor(){
         glow.startColor = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
     }
@@ -118,14 +86,25 @@ public class MagicController : MonoBehaviour
     public void ChangeGlowColor(float score, float magnitude){
         float mappedScore = (score + 1) / 2;
         glow.startColor = Color.Lerp(color_low, color_high, mappedScore);
-        Debug.Log("change color");
+        // Debug.Log("change color");
     }
     public void StopGlowColor(){
         CancelInvoke("RandomGlowColor");
-        Debug.Log("stop random color");
+        // Debug.Log("stop random color");
     }
     public void ResetGlow(){
         glow.Stop();
         glow.startColor = Color.white;
+    }
+
+
+    void startHint(){
+        InvokeRepeating("Hint", 0.1f, 10f);
+    }
+    void Hint(){
+        magicHint.toStart();
+    }
+    void stopHint(){
+        CancelInvoke("Hint");
     }
 }

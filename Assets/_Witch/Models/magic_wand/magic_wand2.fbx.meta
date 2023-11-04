@@ -1,9 +1,29 @@
 fileFormatVersion: 2
-guid: 188fda862d0f9b24faba17c988652b97
+guid: e605a00bfdcdd674686d472cfeea4bc8
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Crystal
+    second: {fileID: 2100000, guid: 1ae8b5ca1c077aa44941124f7cf8daa5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hilt
+    second: {fileID: 2100000, guid: 46bb5a51248510c439f6f70e9002ee4e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metal
+    second: {fileID: 2100000, guid: 69ba1cafc9d772b4aa22ee4d9bbaa2b5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wand
+    second: {fileID: 2100000, guid: 7702fa405e9873840bfdc379a0b8b50d, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

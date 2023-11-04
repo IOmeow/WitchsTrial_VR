@@ -5,7 +5,7 @@ using UnityEngine;
 public class SoundControl : MonoBehaviour
 {
     public AudioSource SE;
-    public AudioClip magicSE, envelopeSE;
+    public AudioClip magicSE, envelopeSE, potSE;
 
     public void playMagigSE(){
         SE.PlayOneShot(magicSE);
@@ -13,6 +13,10 @@ public class SoundControl : MonoBehaviour
 
     public void playEnvelopeSE(){
         SE.PlayOneShot(envelopeSE);
+    }
+
+    public void playPotSE(){
+        SE.PlayOneShot(potSE);
     }
 
 }

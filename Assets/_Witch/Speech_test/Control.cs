@@ -10,12 +10,12 @@ public class Control : MonoBehaviour
     AudioRecorder AudioRecorder;
     MicrophoneInputToLight color;
     MagicController magic;
+    PotControl pot;
 
     bool isMicrophone, isRecording = false, isSTProcess = false, isSAProcess = false;
     string script = "";
     float score, magnitude;
 
-    string googleApiKey;
     void Start()
     {
         SpeechToText = gameObject.GetComponent<SpeechToText>();
@@ -23,6 +23,7 @@ public class Control : MonoBehaviour
         AudioRecorder = gameObject.GetComponent<AudioRecorder>();
         color = gameObject.GetComponent<MicrophoneInputToLight>();
         magic = GameObject.Find("stick").GetComponent<MagicController>();
+        pot = gameObject.GetComponent<PotControl>();
 
         isMicrophone = AudioRecorder.CheckMicrophone();
     }
@@ -59,6 +60,8 @@ public class Control : MonoBehaviour
                 magic.StopGlowColor();
                 magic.ChangeGlowColor(score, magnitude);
                 Invoke("ResetRecord", 10);
+
+                pot.MagicFinish(score);
             }
         }
     }
