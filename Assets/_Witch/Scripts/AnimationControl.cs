@@ -5,6 +5,7 @@ using UnityEngine;
 public class AnimationControl : MonoBehaviour
 {
     private Animator animator;
+    private Animator letter_animator;
     SoundControl sound;
     private bool p;
 
@@ -14,6 +15,8 @@ public class AnimationControl : MonoBehaviour
     void Start()
     {
         animator = gameObject.GetComponent<Animator>();
+        letter_animator = transform.GetChild(2).gameObject.GetComponent<Animator>();
+
         sound = GameObject.Find("=== System ===").GetComponent<SoundControl>();
         p = false;
 
@@ -36,6 +39,7 @@ public class AnimationControl : MonoBehaviour
         if (!p && envelope_time+envelope_reload_time < Time.time){
             Debug.Log("envelope opened");
             animator.SetBool("press", true);
+            Invoke("openLetter", 2f);
             p = true;
 
             envelope_time = Time.time;
@@ -47,6 +51,7 @@ public class AnimationControl : MonoBehaviour
         if(p && envelope_time+envelope_reload_time < Time.time){
             Debug.Log("envelope closed");
             animator.SetBool("press", false);
+            letter_animator.SetBool("letter_pos", false);
             p = false;
 
             envelope_time = Time.time;
@@ -56,5 +61,9 @@ public class AnimationControl : MonoBehaviour
 
     public bool isOpen(){
         return p;
+    }
+
+    void openLetter(){
+        letter_animator.SetBool("letter_pos", true);
     }
 }
