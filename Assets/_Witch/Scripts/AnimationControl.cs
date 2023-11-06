@@ -5,6 +5,7 @@ using UnityEngine;
 public class AnimationControl : MonoBehaviour
 {
     private Animator animator;
+    SoundControl sound;
     private bool p;
 
     float envelope_time;
@@ -13,6 +14,7 @@ public class AnimationControl : MonoBehaviour
     void Start()
     {
         animator = gameObject.GetComponent<Animator>();
+        sound = GameObject.Find("=== System ===").GetComponent<SoundControl>();
         p = false;
 
         envelope_time = Time.time;
@@ -37,6 +39,7 @@ public class AnimationControl : MonoBehaviour
             p = true;
 
             envelope_time = Time.time;
+            sound.playEnvelopeSE();
         }
     }
 
@@ -47,6 +50,7 @@ public class AnimationControl : MonoBehaviour
             p = false;
 
             envelope_time = Time.time;
+            sound.playEnvelopeSE();
         }
     }
 

@@ -44,6 +44,7 @@ public class Control : MonoBehaviour
 
                 magic.StopGlowColor();
                 ResetRecord();
+                magic.startHint();
             }
             else if(script != "ERROR"){
                 isSTProcess = false;

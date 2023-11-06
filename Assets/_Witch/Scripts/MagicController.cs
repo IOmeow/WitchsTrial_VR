@@ -31,10 +31,10 @@ public class MagicController : MonoBehaviour
     }
     
     int t = 0;
-    bool MagicStart = false;
+    bool MagicStart = false, glowEnd = true;
     void OnTriggerEnter(Collider other)
     {
-        if(other.name == "track1" && t==0){
+        if(other.name == "track1" && t==0 && glowEnd){
             t=1;
             Invoke("ResetTrack", 5);
             Debug.Log("track1");
@@ -58,12 +58,15 @@ public class MagicController : MonoBehaviour
 
             glow.Play();
             sound.playMagigSE();
+
+            stopHint();
         }
     }
     void OnTriggerExit(Collider other)
     {
         if(other.name == "StayTarget" && MagicStart){
             MagicStart=false;
+            glowEnd = false;
             speech.stopRecord();
 
             InvokeRepeating("RandomGlowColor", 0.1f, 1f);
@@ -75,7 +78,7 @@ public class MagicController : MonoBehaviour
     void ResetTrack(){
         t=0;
         // Debug.Log("Reset track");
-        if(!MagicStart)trail.SetActive(false);;
+        trail.SetActive(false);;
     }
 
     void RandomGlowColor(){
@@ -95,10 +98,12 @@ public class MagicController : MonoBehaviour
     public void ResetGlow(){
         glow.Stop();
         glow.startColor = Color.white;
+
+        glowEnd = true;
     }
 
 
-    void startHint(){
+    public void startHint(){
         InvokeRepeating("Hint", 0.1f, 10f);
     }
     void Hint(){
