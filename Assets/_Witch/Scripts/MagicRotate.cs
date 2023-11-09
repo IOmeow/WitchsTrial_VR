@@ -44,7 +44,7 @@ public class MagicRotate : MonoBehaviour
         _value -= _speed*Time.deltaTime*0.01f;
         float distance = Mathf.Lerp(0, _distance, _value);
 
-        Quaternion rotate = Quaternion.AngleAxis(_angle, Vector3.back);
+        Quaternion rotate = Quaternion.AngleAxis(_angle, Vector3.forward);
         Vector3 dir = Vector3.Normalize(_surround.position - _center.position);
         _surround.position = rotate*dir*distance+_center.position;
     }

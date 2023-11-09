@@ -5,7 +5,7 @@ using UnityEngine;
 public class MagicController : MonoBehaviour
 {
     Control speech;
-    MagicRotate magicHint;
+    // MagicRotate magicHint;
 
     private GameObject trail;
     private ParticleSystem glow;
@@ -16,7 +16,7 @@ public class MagicController : MonoBehaviour
     {
         speech = GameObject.Find("=== System ===").GetComponent<Control>();
         sound = GameObject.Find("=== System ===").GetComponent<SoundControl>();
-        magicHint = GameObject.Find("Magic_hint").GetComponent<MagicRotate>();
+        // magicHint = GameObject.Find("Magic_hint").GetComponent<MagicRotate>();
 
         glow = GameObject.Find("glow").GetComponent<ParticleSystem>();
         trail = GameObject.Find("trail");
@@ -72,7 +72,7 @@ public class MagicController : MonoBehaviour
             InvokeRepeating("RandomGlowColor", 0.1f, 1f);
             trail.SetActive(false);
 
-            sound.playMagigSE();
+            // sound.playMagigSE();
         }
     }
     void ResetTrack(){
@@ -107,7 +107,7 @@ public class MagicController : MonoBehaviour
         InvokeRepeating("Hint", 0.1f, 10f);
     }
     void Hint(){
-        magicHint.toStart();
+        // magicHint.toStart();
     }
     void stopHint(){
         CancelInvoke("Hint");

@@ -11,6 +11,8 @@ public class Control : MonoBehaviour
     MicrophoneInputToLight color;
     MagicController magic;
     PotControl pot;
+    GameControl gc;
+    SoundControl sound;
 
     bool isMicrophone, isRecording = false, isSTProcess = false, isSAProcess = false;
     string script = "";
@@ -24,6 +26,8 @@ public class Control : MonoBehaviour
         color = gameObject.GetComponent<MicrophoneInputToLight>();
         magic = GameObject.Find("stick").GetComponent<MagicController>();
         pot = gameObject.GetComponent<PotControl>();
+        gc = gameObject.GetComponent<GameControl>();
+        sound = gameObject.GetComponent<SoundControl>();
 
         isMicrophone = AudioRecorder.CheckMicrophone();
     }
@@ -61,8 +65,10 @@ public class Control : MonoBehaviour
                 magic.StopGlowColor();
                 magic.ChangeGlowColor(score, magnitude);
                 Invoke("ResetRecord", 10);
-
+                
+                gc.AddTutorialMagic();
                 pot.MagicFinish(score);
+                sound.playMagigFinishSE(score);
             }
         }
     }
