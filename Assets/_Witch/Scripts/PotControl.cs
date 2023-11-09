@@ -9,13 +9,14 @@ public class PotControl : MonoBehaviour
     private float final_score = 0f;
     private int count = 0;
     private GameObject magic;
+    bool tutorial = true;
 
     private int potion_num = 0; //哪一款魔藥瓶
 
     SoundControl sound;
     MagicController magicControl;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         liquid_1 = GameObject.Find("liquid_1");
         liquid_2 = GameObject.Find("liquid_2");
@@ -36,7 +37,7 @@ public class PotControl : MonoBehaviour
     }
 
     public void MagicFinish(float score){
-        if(count==3)return;
+        if(count==3||tutorial)return;
 
         float mappedScore = (score + 1) / 2;
         magic.GetComponent<ParticleSystem>().startColor = Color.Lerp(Color.cyan, Color.yellow, mappedScore);
@@ -76,5 +77,9 @@ public class PotControl : MonoBehaviour
     void stopMagic(){
         magic.GetComponent<ParticleSystem>().Stop();
         magicControl.startHint();
+    }
+
+    public void tutorialEnd(){
+        tutorial = false;
     }
 }

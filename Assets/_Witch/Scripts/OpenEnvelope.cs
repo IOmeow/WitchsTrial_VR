@@ -10,7 +10,7 @@ public class OpenEnvelope : MonoBehaviour
 
     GameControl gc;
 
-    void Start()
+    void Awake()
     {
         envelopes = GameObject.Find("Envelope");
         ac1 = envelopes.transform.GetChild(0).gameObject.GetComponent<AnimationControl>();
