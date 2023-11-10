@@ -10,6 +10,7 @@ public class PotControl : MonoBehaviour
     private int count = 0;
     private GameObject magic;
     bool tutorial = true;
+    bool potion2float = false;
 
     private int potion_num = 0; //哪一款魔藥瓶
 
@@ -34,6 +35,17 @@ public class PotControl : MonoBehaviour
 
         magicControl = GameObject.Find("stick").GetComponent<MagicController>();
         sound = GameObject.Find("=== System ===").GetComponent<SoundControl>();
+    }
+
+    void Update(){
+        if(Input.GetKeyDown(KeyCode.L))MagicFinish(0f);
+        if(Input.GetKeyDown(KeyCode.K))MagicFinish(0.5f);
+        if(Input.GetKeyDown(KeyCode.J))MagicFinish(-0.5f);
+
+        if(potion2float){
+            // Debug.Log(potion.transform.position.y);
+            if(potion.transform.position.y<1)potion.transform.Translate(Vector3.up * Time.deltaTime*0.5f);
+        }
     }
 
     public void MagicFinish(float score){
@@ -76,7 +88,8 @@ public class PotControl : MonoBehaviour
 
     void stopMagic(){
         magic.GetComponent<ParticleSystem>().Stop();
-        magicControl.startHint();
+        if(count==3)potion2float = true;
+        else magicControl.startHint();
     }
 
     public void tutorialEnd(){

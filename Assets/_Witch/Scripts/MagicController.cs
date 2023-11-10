@@ -10,9 +10,11 @@ public class MagicController : MonoBehaviour
     private GameObject trail;
     private ParticleSystem glow;
 
+    GameObject hint;
+
     SoundControl sound;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         speech = GameObject.Find("=== System ===").GetComponent<Control>();
         sound = GameObject.Find("=== System ===").GetComponent<SoundControl>();
@@ -21,6 +23,8 @@ public class MagicController : MonoBehaviour
         glow = GameObject.Find("glow").GetComponent<ParticleSystem>();
         trail = GameObject.Find("trail");
         trail.SetActive(false);
+
+        hint = GameObject.Find("TrackHint");
     }
 
     // Update is called once per frame
@@ -72,7 +76,7 @@ public class MagicController : MonoBehaviour
             InvokeRepeating("RandomGlowColor", 0.1f, 1f);
             trail.SetActive(false);
 
-            sound.playMagigSE();
+            // sound.playMagigSE();
         }
     }
     void ResetTrack(){
@@ -104,12 +108,16 @@ public class MagicController : MonoBehaviour
 
 
     public void startHint(){
-        InvokeRepeating("Hint", 0.1f, 10f);
+        // InvokeRepeating("Hint", 0.1f, 10f);
+        hint.SetActive(true);
+        Debug.Log("start hint");
     }
-    void Hint(){
-        // magicHint.toStart();
+    public void startHintDelay(float second){
+        Invoke("startHint", second);
     }
     void stopHint(){
-        CancelInvoke("Hint");
+        // CancelInvoke("Hint");
+        hint.SetActive(false);
+        Debug.Log("stop hint");
     }
 }

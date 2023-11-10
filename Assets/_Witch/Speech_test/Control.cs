@@ -12,6 +12,7 @@ public class Control : MonoBehaviour
     MagicController magic;
     PotControl pot;
     GameControl gc;
+    SoundControl sound;
 
     bool isMicrophone, isRecording = false, isSTProcess = false, isSAProcess = false;
     string script = "";
@@ -26,6 +27,7 @@ public class Control : MonoBehaviour
         magic = GameObject.Find("stick").GetComponent<MagicController>();
         pot = gameObject.GetComponent<PotControl>();
         gc = gameObject.GetComponent<GameControl>();
+        sound = gameObject.GetComponent<SoundControl>();
 
         isMicrophone = AudioRecorder.CheckMicrophone();
     }
@@ -66,6 +68,7 @@ public class Control : MonoBehaviour
                 
                 gc.AddTutorialMagic();
                 pot.MagicFinish(score);
+                sound.playMagigFinishSE(score);
             }
         }
     }

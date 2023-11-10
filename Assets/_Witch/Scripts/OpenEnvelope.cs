@@ -4,21 +4,21 @@ using UnityEngine;
 
 public class OpenEnvelope : MonoBehaviour
 {
-    GameObject envelopes;
     AnimationControl ac1, ac2, ac3, ac4;
     bool opening = false;
+    MagicController magic;
 
     GameControl gc;
 
     void Awake()
     {
-        envelopes = GameObject.Find("Envelope");
-        ac1 = envelopes.transform.GetChild(0).gameObject.GetComponent<AnimationControl>();
-        ac2 = envelopes.transform.GetChild(1).gameObject.GetComponent<AnimationControl>();
-        ac3 = envelopes.transform.GetChild(2).gameObject.GetComponent<AnimationControl>();
-        ac4 = envelopes.transform.GetChild(3).gameObject.GetComponent<AnimationControl>();
+        ac1 = GameObject.Find("envelope1").transform.GetChild(0).gameObject.GetComponent<AnimationControl>();
+        ac2 = GameObject.Find("envelope2").transform.GetChild(0).gameObject.GetComponent<AnimationControl>();
+        ac3 = GameObject.Find("envelope3").transform.GetChild(0).gameObject.GetComponent<AnimationControl>();
+        ac4 = GameObject.Find("envelope4").transform.GetChild(0).gameObject.GetComponent<AnimationControl>();
 
         gc = GameObject.Find("=== System ===").GetComponent<GameControl>();
+        magic = GameObject.Find("stick").GetComponent<MagicController>();
     }
 
 
@@ -26,33 +26,47 @@ public class OpenEnvelope : MonoBehaviour
     {
         switch(other.name){
         case "wax1":
-            open_or_close(ac1);
+            open_letter(ac1);
             break;
         case "wax2":
-            open_or_close(ac2);
+            open_letter(ac2);
             break;
         case "wax3":
-            open_or_close(ac3);
+            open_letter(ac3);
             break;
         case "wax4":
-            open_or_close(ac4);
+            open_letter(ac4);
+            break;
+        case "no":
+            close_letter();
+            break;
+        case "yes":
+            if(ac1.isOpen()){
+                ac1.flytopot();ac2.flyaway();ac3.flyaway();ac4.flyaway();
+            }
+            if(ac2.isOpen()){
+                ac2.flytopot();ac1.flyaway();ac3.flyaway();ac4.flyaway();
+            }
+            if(ac3.isOpen()){
+                ac3.flytopot();ac1.flyaway();ac2.flyaway();ac4.flyaway();
+            }
+            if(ac4.isOpen()){
+                ac4.flytopot();ac1.flyaway();ac2.flyaway();ac3.flyaway();
+            }
+            magic.startHintDelay(3f);
             break;
         }
-        // if(ac1.isOpen() && other.name=="paper1")choose_scene(1);
-        // if(ac2.isOpen() && other.name=="paper2")choose_scene(2);
-        // if(ac3.isOpen() && other.name=="paper3")choose_scene(3);
-        // if(ac4.isOpen() && other.name=="paper4")choose_scene(4);
-
     }
 
-    void open_or_close(AnimationControl ac){
+    void open_letter(AnimationControl ac){
         opening = ac1.isOpen()||ac2.isOpen()||ac3.isOpen()||ac4.isOpen();
         if(!opening)ac._open();
-        else ac._close();
     }
 
-    void choose_scene(int scene){
-        //light for 3 sec and choose
-
+    void close_letter(){
+        if(ac1.isOpen())ac1._close();
+        if(ac2.isOpen())ac2._close();
+        if(ac3.isOpen())ac3._close();
+        if(ac4.isOpen())ac4._close();
     }
 }
