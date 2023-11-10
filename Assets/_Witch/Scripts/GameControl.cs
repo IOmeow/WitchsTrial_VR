@@ -9,7 +9,7 @@ public class GameControl : MonoBehaviour
     PotControl pot;
     FadeControl fade;
 
-    bool pickUp = false;
+    bool pickUp = false, _hint=false;
     GameObject hint;
     int tutorial_magic = 0, scene_choose = 0;
 
@@ -22,7 +22,7 @@ public class GameControl : MonoBehaviour
         hint.SetActive(false);
 
         space = GameObject.Find("=== Space ===");
-        space.SetActive(false);
+        space.transform.position = new Vector3(5000f, 0f,0f);
         method = GameObject.Find("=== Method ===");
         method.SetActive(false);
 
@@ -38,8 +38,13 @@ public class GameControl : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.O))tutorial_magic=2;
 
         if(!pickUp)return;  //還沒拿法仗
-        else if(tutorial_magic<2){
+        else if(tutorial_magic==0&&!_hint){
             hint.SetActive(true);
+            _hint = true;
+        }
+        else if(tutorial_magic==1&&!_hint){
+            hint.SetActive(true);
+            _hint = true;
         }
         else if(tutorial_magic==2){
             tutorial_magic++;
@@ -49,7 +54,8 @@ public class GameControl : MonoBehaviour
     }
     void gameStart(){
         method.SetActive(true);
-        space.SetActive(true);
+        // space.SetActive(true);
+        space.transform.position = new Vector3(0,0,0.317f);
         pot.tutorialEnd();
         fade.FadeIn();
     }
@@ -62,6 +68,7 @@ public class GameControl : MonoBehaviour
     }
     public void AddTutorialMagic(){
         if(tutorial_magic<2)tutorial_magic++;
+        _hint = false;
         // Debug.Log("magicfinish");
     }
 }

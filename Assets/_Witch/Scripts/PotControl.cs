@@ -44,7 +44,7 @@ public class PotControl : MonoBehaviour
 
         if(potion2float){
             // Debug.Log(potion.transform.position.y);
-            if(potion.transform.position.y<1)potion.transform.Translate(Vector3.up * Time.deltaTime*0.5);
+            if(potion.transform.position.y<1)potion.transform.Translate(Vector3.up * Time.deltaTime*0.5f);
         }
     }
 
