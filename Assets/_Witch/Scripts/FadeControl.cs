@@ -5,11 +5,12 @@ using UnityEngine;
 public class FadeControl : MonoBehaviour
 {
     private Animator animator;
-    bool isBlack = false;
+    bool isBlack = true;
 
     void Start()
     {
         animator = gameObject.GetComponent<Animator>();
+        Invoke("FadeIn", 5f);
     }
 
     public void FadeOut(){
