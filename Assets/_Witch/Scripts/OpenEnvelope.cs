@@ -7,6 +7,7 @@ public class OpenEnvelope : MonoBehaviour
     AnimationControl ac1, ac2, ac3, ac4;
     bool opening = false;
     MagicController magic;
+    SoundControl sound;
 
     GameControl gc;
 
@@ -19,6 +20,7 @@ public class OpenEnvelope : MonoBehaviour
 
         gc = GameObject.Find("=== System ===").GetComponent<GameControl>();
         magic = GameObject.Find("stick").GetComponent<MagicController>();
+        sound = GameObject.Find("=== System ===").GetComponent<SoundControl>();
     }
 
 
@@ -43,15 +45,19 @@ public class OpenEnvelope : MonoBehaviour
         case "yes":
             if(ac1.isOpen()){
                 ac1.flytopot();ac2.flyaway();ac3.flyaway();ac4.flyaway();
+                sound.playBGM(1);
             }
             if(ac2.isOpen()){
                 ac2.flytopot();ac1.flyaway();ac3.flyaway();ac4.flyaway();
+                sound.playBGM(2);
             }
             if(ac3.isOpen()){
                 ac3.flytopot();ac1.flyaway();ac2.flyaway();ac4.flyaway();
+                sound.playBGM(3);
             }
             if(ac4.isOpen()){
                 ac4.flytopot();ac1.flyaway();ac2.flyaway();ac3.flyaway();
+                sound.playBGM(4);
             }
             magic.startHintDelay(3f);
             break;

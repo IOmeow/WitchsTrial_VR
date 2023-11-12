@@ -10,7 +10,7 @@ public class FadeControl : MonoBehaviour
     void Start()
     {
         animator = gameObject.GetComponent<Animator>();
-        Invoke("FadeIn", 5f);
+        Invoke("FadeIn", 3f);
     }
 
     public void FadeOut(){

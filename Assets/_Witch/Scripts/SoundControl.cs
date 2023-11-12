@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class SoundControl : MonoBehaviour
 {
-    public AudioSource SE;
-    public AudioClip magicSE, envelopeSE, potSE;
+    public AudioSource SE, BGM;
+    public AudioClip magicSE, envelopeSE, potSE, flySE;
     public List<AudioClip> output = new List<AudioClip>();
+    public List<AudioClip> bgm = new List<AudioClip>();
 
     public void playMagigSE(){
         SE.PlayOneShot(magicSE);
@@ -29,6 +30,36 @@ public class SoundControl : MonoBehaviour
 
     public void playPotSE(){
         SE.PlayOneShot(potSE);
+    }
+
+    private void playFlySE(){
+        SE.PlayOneShot(flySE);
+    }
+
+    public void playBGM(int scene){
+        BGM.Pause();
+        // StartCoroutine(FadeMusic(BGM, 3f, 0));
+        Invoke("playFlySE", 3f);
+
+        BGM.clip = bgm[scene-1];
+        Invoke("_playBGM", 5f);
+        Debug.Log("bgm"+scene);
+    }
+    void _playBGM(){
+        // BGM.volume = 0.1f;
+        BGM.Play();
+    }
+
+    private static IEnumerator FadeMusic(AudioSource audioSource, float duration, float targetVolume){
+        float currentTime = 0;
+        float start = audioSource.volume;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            audioSource.volume = Mathf.Lerp(start, targetVolume, currentTime / duration);
+            yield return null;
+        }
+        yield break;
     }
 
 }
