@@ -1271,7 +1271,7 @@ PrefabInstance:
     - target: {fileID: -1323743223009653715, guid: c13dabd4c7a04de4a90b52a5d25d5c0b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 4413a3c734d45654f9441f29084d78c0, type: 2}
+      objectReference: {fileID: 2100000, guid: d4921811cf6992b4a960e4a2229ca2fa, type: 2}
     - target: {fileID: -1323743223009653715, guid: c13dabd4c7a04de4a90b52a5d25d5c0b, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
@@ -1378,7 +1378,7 @@ PrefabInstance:
     - target: {fileID: -1323743223009653715, guid: c13dabd4c7a04de4a90b52a5d25d5c0b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 4413a3c734d45654f9441f29084d78c0, type: 2}
+      objectReference: {fileID: 2100000, guid: d4921811cf6992b4a960e4a2229ca2fa, type: 2}
     - target: {fileID: -1323743223009653715, guid: c13dabd4c7a04de4a90b52a5d25d5c0b, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
@@ -1490,6 +1490,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -1323743223009653715, guid: f1fa5a7a0500f8d4b8703b76662a1c3f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9c7fffdc0e93088418f4d4d74c264ffc, type: 2}
     - target: {fileID: 919132149155446097, guid: f1fa5a7a0500f8d4b8703b76662a1c3f, type: 3}
       propertyPath: m_Name
       value: NEW_envelope2_1
@@ -1539,7 +1543,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3722057f515e5454cae15c8c79a2f006, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 2460652629962836728}
 --- !u!95 &59746265644735987
 Animator:
   serializedVersion: 5
@@ -1687,6 +1690,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -1323743223009653715, guid: f1fa5a7a0500f8d4b8703b76662a1c3f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9c7fffdc0e93088418f4d4d74c264ffc, type: 2}
     - target: {fileID: 919132149155446097, guid: f1fa5a7a0500f8d4b8703b76662a1c3f, type: 3}
       propertyPath: m_Name
       value: NEW_envelope2_3
@@ -1733,7 +1740,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3722057f515e5454cae15c8c79a2f006, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 1885479168332077691}
 --- !u!95 &5395782369531116033
 Animator:
   serializedVersion: 5
@@ -1814,7 +1820,7 @@ PrefabInstance:
     - target: {fileID: -1323743223009653715, guid: c13dabd4c7a04de4a90b52a5d25d5c0b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 4413a3c734d45654f9441f29084d78c0, type: 2}
+      objectReference: {fileID: 2100000, guid: d4921811cf6992b4a960e4a2229ca2fa, type: 2}
     - target: {fileID: -1323743223009653715, guid: c13dabd4c7a04de4a90b52a5d25d5c0b, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
@@ -1930,6 +1936,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 203ecf4e314bc674d9e01608fab937ed, type: 2}
+    - target: {fileID: 5382259228830420936, guid: 4d36a51c6ee204a4688f033171cd3c68, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d4921811cf6992b4a960e4a2229ca2fa, type: 2}
+    - target: {fileID: 5629098379059483717, guid: 4d36a51c6ee204a4688f033171cd3c68, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9c7fffdc0e93088418f4d4d74c264ffc, type: 2}
     - target: {fileID: 5651365576836482194, guid: 4d36a51c6ee204a4688f033171cd3c68, type: 3}
       propertyPath: button
       value: 
@@ -2069,11 +2083,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e262166f8f282d428ec4a71944dfd04, type: 3}
---- !u!1 &1885479168332077691 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4888332654634137048, guid: 1e262166f8f282d428ec4a71944dfd04, type: 3}
-  m_PrefabInstance: {fileID: 6484138884497010595}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &9111240577286472578 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2850190317300542497, guid: 1e262166f8f282d428ec4a71944dfd04, type: 3}
@@ -2205,6 +2214,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -1323743223009653715, guid: f1fa5a7a0500f8d4b8703b76662a1c3f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9c7fffdc0e93088418f4d4d74c264ffc, type: 2}
     - target: {fileID: 919132149155446097, guid: f1fa5a7a0500f8d4b8703b76662a1c3f, type: 3}
       propertyPath: m_Name
       value: NEW_envelope2_2
@@ -2249,7 +2262,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3722057f515e5454cae15c8c79a2f006, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 703342341231887348}
 --- !u!95 &2231591780121218000
 Animator:
   serializedVersion: 5
