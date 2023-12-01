@@ -36,8 +36,20 @@ public class MagicController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.M))startHint();
-        if(Input.GetKeyDown(KeyCode.N))stopHint();
+        // if(Input.GetKeyDown(KeyCode.M))startHint();
+        // if(Input.GetKeyDown(KeyCode.N))stopHint();
+
+        // if(Input.GetKeyDown(KeyCode.Z))ChangeGlowColor(-0.9f,0);
+        // if(Input.GetKeyDown(KeyCode.X))ChangeGlowColor(-0.7f,0);
+        // if(Input.GetKeyDown(KeyCode.C))ChangeGlowColor(-0.5f,0);
+        // if(Input.GetKeyDown(KeyCode.V))ChangeGlowColor(-0.3f,0);
+        // if(Input.GetKeyDown(KeyCode.B))ChangeGlowColor(-0.1f,0);
+
+        // if(Input.GetKeyDown(KeyCode.A))ChangeGlowColor(0.9f,0);
+        // if(Input.GetKeyDown(KeyCode.S))ChangeGlowColor(0.7f,0);
+        // if(Input.GetKeyDown(KeyCode.D))ChangeGlowColor(0.5f,0);
+        // if(Input.GetKeyDown(KeyCode.F))ChangeGlowColor(0.3f,0);
+        // if(Input.GetKeyDown(KeyCode.G))ChangeGlowColor(0.1f,0);
     }
     
     int t = 0;
@@ -107,12 +119,22 @@ public class MagicController : MonoBehaviour
     void RandomGlowColor(){
         glow.startColor = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
     }
-    Color color_low = Color.cyan;
+    // Color color_low = Color.cyan;
+    Color color_low = new Color(0f, 0.5f, 1f);
+    Color color_mid = new Color(0.94f, 0.39f, 0.67f);
     Color color_high = Color.yellow;
     public void ChangeGlowColor(float score, float magnitude){
         float mappedScore = (score + 1) / 2;
-        glow.startColor = Color.Lerp(color_low, color_high, mappedScore);
+        // glow.startColor = Color.Lerp(color_low, color_high, mappedScore);
         // Debug.Log("change color");
+
+        if(score<0){
+            mappedScore = score+1;
+            glow.startColor = Color.Lerp(color_low, color_mid, mappedScore);
+        }
+        else{
+            glow.startColor = Color.Lerp(color_mid, color_high, mappedScore);
+        }
     }
     public void StopGlowColor(){
         CancelInvoke("RandomGlowColor");
