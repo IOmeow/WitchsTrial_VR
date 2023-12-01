@@ -7,7 +7,6 @@ public class GameControl : MonoBehaviour
 {   // 拿起法杖→（教學+練習）→場景→飛進信紙→決定場景→3次施咒→藥水動畫
     MagicController magic;
     PotControl pot;
-    // FadeControl fade;
 
     bool pickUp = false, _hint=false;
     GameObject hint;
@@ -27,8 +26,6 @@ public class GameControl : MonoBehaviour
         method.SetActive(false);
 
         pot = gameObject.GetComponent<PotControl>();
-
-        // fade = GameObject.Find("Fade").GetComponent<FadeControl>();
     }
 
     // Update is called once per frame
@@ -48,7 +45,6 @@ public class GameControl : MonoBehaviour
         }
         else if(tutorial_magic==2){
             tutorial_magic++;
-            // fade.FadeOut();
 
             Invoke("fadeToStart", 10f);
         }
@@ -74,6 +70,5 @@ public class GameControl : MonoBehaviour
     public void AddTutorialMagic(){
         if(tutorial_magic<2)tutorial_magic++;
         _hint = false;
-        // Debug.Log("magicfinish");
     }
 }

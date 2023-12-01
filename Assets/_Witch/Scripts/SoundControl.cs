@@ -38,7 +38,6 @@ public class SoundControl : MonoBehaviour
 
     public void playBGM(int scene){
         BGM.Pause();
-        // StartCoroutine(FadeMusic(BGM, 3f, 0));
         Invoke("playFlySE", 3f);
 
         BGM.clip = bgm[scene-1];
@@ -46,7 +45,6 @@ public class SoundControl : MonoBehaviour
         Debug.Log("bgm"+scene);
     }
     void _playBGM(){
-        // BGM.volume = 0.1f;
         BGM.Play();
     }
 

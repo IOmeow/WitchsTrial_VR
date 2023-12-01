@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PotControl : MonoBehaviour
 {
@@ -35,13 +36,11 @@ public class PotControl : MonoBehaviour
 
         magicControl = GameObject.Find("stick").GetComponent<MagicController>();
         sound = GameObject.Find("=== System ===").GetComponent<SoundControl>();
+
+        if(SceneManager.GetActiveScene().name=="Witch_demo")tutorial = false;
     }
 
     void Update(){
-        if(Input.GetKeyDown(KeyCode.L))MagicFinish(0f);
-        if(Input.GetKeyDown(KeyCode.K))MagicFinish(0.5f);
-        if(Input.GetKeyDown(KeyCode.J))MagicFinish(-0.5f);
-
         if(potion2float){
             // Debug.Log(potion.transform.position.y);
             if(potion.transform.position.y<1)potion.transform.Translate(Vector3.up * Time.deltaTime*0.5f);
