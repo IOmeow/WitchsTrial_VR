@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     GameObject SceneCorridor, SceneClassroom;
     GameObject black_board;
 
+    TrialControl trial1, trial2;
+
     void Start()
     {
         magic = GameObject.Find("stick").GetComponent<MagicController>();
@@ -26,6 +28,9 @@ public class GameManager : MonoBehaviour
         SceneClassroom.transform.position = new Vector3(5000f, 0f,0f);
 
         instance = this;
+
+        trial1 = GameObject.Find("trial1").GetComponent<TrialControl>();
+        trial1 = GameObject.Find("trial2").GetComponent<TrialControl>();
     }
 
     int magic_counter=0;  //0:tutorial
@@ -64,5 +69,13 @@ public class GameManager : MonoBehaviour
         black_board.transform.GetChild(1).gameObject.SetActive(false);
         black_board.transform.GetChild(2).gameObject.SetActive(true);
         projection.OpenProjection();
-    } 
+    }
+
+    public void startToMagic(){
+        magic.startHint();
+    }
+
+    public void ChangePage(){
+        if()trial1.changePage();
+    }
 }
