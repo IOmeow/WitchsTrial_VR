@@ -29,12 +29,12 @@ public class SpeechControl : MonoBehaviour
     }
 
     void Update(){
-        if(Input.GetKeyDown(KeyCode.R)){
-            startRecord();
-        }
-        if(Input.GetKeyDown(KeyCode.E)){
-            stopRecord();
-        }
+        // if(Input.GetKeyDown(KeyCode.R)){
+        //     startRecord();
+        // }
+        // if(Input.GetKeyDown(KeyCode.E)){
+        //     stopRecord();
+        // }
 
         if(isSTProcess){
             script = SpeechToText.GetTranscript();
@@ -44,6 +44,8 @@ public class SpeechControl : MonoBehaviour
 
                 magic.StopGlowColor();
                 ResetRecord();
+
+                // 失敗音效+提示？
                 magic.startHint();
                 volume.stopVolume();
             }
@@ -65,20 +67,37 @@ public class SpeechControl : MonoBehaviour
                 
                 sound.playMagigFinishSE(score);
                 volume.endVolume();
+                GameManager.instance.score = score;
                 GameManager.instance.endMagic();
             }
         }
     }
 
     public void startRecord(){
-        if(!isRecording){
+        if(!isRecording && GameManager.instance.debug){
+            isRecording = true;
+            Debug.Log("[Debug] Start Record");
+        }
+        else if(!isRecording){
             AudioRecorder.StartRecording();
             isRecording = true;
         }
         
     }
     public void stopRecord(){
-        if(isRecording){
+        if(isRecording && GameManager.instance.debug){
+            isRecording = false;
+            Debug.Log("[Debug] Stop Record");
+
+            magic.StopGlowColor();
+            magic.ChangeGlowColor(GameManager.instance.score, GameManager.instance.score);
+            Invoke("ResetRecord", 10);
+
+            sound.playMagigFinishSE(GameManager.instance.score);
+            volume.endVolume();
+            GameManager.instance.endMagic();
+        }
+        else if(isRecording){
             AudioRecorder.StopRecording();
             isRecording = false;
 

@@ -9,9 +9,9 @@ public class ProjectionControl : MonoBehaviour
     void Start(){
         animator = gameObject.GetComponent<Animator>();
     }
-    void Update(){
-        if(Input.GetKeyDown(KeyCode.P))OpenProjection();
-    }
+    // void Update(){
+    //     if(Input.GetKeyDown(KeyCode.P))OpenProjection();
+    // }
 
     public void OpenProjection(){
         Debug.Log("Open Projectoin");

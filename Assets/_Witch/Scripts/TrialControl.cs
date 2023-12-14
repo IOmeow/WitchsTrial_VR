@@ -6,7 +6,7 @@ public class TrialControl : MonoBehaviour
 {
     private GameObject[] context;
     private int page = -1;
-    private GameObject toChange;
+    private GameObject change_c;
 
     void Awake()
     {
@@ -18,27 +18,23 @@ public class TrialControl : MonoBehaviour
 
         ShowPage(page);
 
-        toChange = GameObject.Find("changePage");
-        toChange.SetActive(false);
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.P))
-            ChangePage();
+        change_c = GameObject.Find("changePage");
     }
 
     public void ChangePage()
     {
-        toChange.SetActive(true);
-        page++;
-
-        if (page >= context.Length){
-            Debug.Log("projection finish");
-            GameManager.instance.startToMagic();
-            toChange.SetActive(false);
+        if (page > context.Length)return;
+        else {
+            page++;
+            ShowPage(page);
         }
-        else ShowPage(page);
+
+        if (page == context.Length-1){
+            Debug.Log("projection finish");
+            change_c.SetActive(false);
+            GameManager.instance.startToTrial();
+            page++;
+        }
     }
 
     private void ShowPage(int pageIndex)
@@ -50,5 +46,16 @@ public class TrialControl : MonoBehaviour
             else
                 context[i].SetActive(false);
         }
+    }
+
+    public void CanChangePage(){
+        change_c.SetActive(true);
+    }
+    public void EndPage(){
+        ShowPage(-1);
+    }
+
+    public void PlaySlide(){     // 如果要自動播可以加
+        ShowPage(0);
     }
 }

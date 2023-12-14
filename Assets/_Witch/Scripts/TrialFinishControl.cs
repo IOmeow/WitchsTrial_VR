@@ -14,8 +14,7 @@ public class TrialFinishControl : MonoBehaviour
         {
             context[i] = transform.GetChild(i).gameObject;
         }
-
-        ShowMethod(state);
+        ShowMethod(-1);
     }
 
     void Update()
@@ -24,6 +23,10 @@ public class TrialFinishControl : MonoBehaviour
             ChangeState(true);
         if (Input.GetKeyDown(KeyCode.W))
             ChangeState(false);
+    }
+
+    public void StartMethod(){
+        ShowMethod(state);
     }
 
     public void ChangeState(bool isGood)
