@@ -54,7 +54,7 @@ public class MagicController : MonoBehaviour
     
     int t = 0;
     bool MagicStart = false, glowEnd = true;
-    void OnTriggerEnter(Collider other)
+    void OnTriggerStay(Collider other)
     {
         if(other.name == "track1" && t==0 && glowEnd){
             t=1;
@@ -96,6 +96,7 @@ public class MagicController : MonoBehaviour
 
                 InvokeRepeating("RandomGlowColor", 0.1f, 1f);
             }
+            CancelInvoke("ResetTrack");
             ResetTrack();
             target.transform.localScale = new Vector3(4f,10f,4f);
         }
@@ -145,6 +146,7 @@ public class MagicController : MonoBehaviour
         glow.startColor = Color.white;
 
         glowEnd = true;
+        target.SetActive(false);
     }
 
 
@@ -152,6 +154,7 @@ public class MagicController : MonoBehaviour
         // InvokeRepeating("Hint", 0.1f, 10f);
         hint.SetActive(true);
         track.SetActive(true);
+        target.SetActive(true);
         Debug.Log("start hint");
     }
     public void startHintDelay(float second){
