@@ -19,10 +19,14 @@ public class TrialFinishControl : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
-            ChangeState(true);
-        if (Input.GetKeyDown(KeyCode.W))
-            ChangeState(false);
+        // if (Input.GetKeyDown(KeyCode.Q))
+        //     ChangeState(true);
+        // if (Input.GetKeyDown(KeyCode.W))
+        //     ChangeState(false);
+    }
+
+    public void StartMethod(){
+        ShowMethod(state);
     }
 
     public void StartMethod(){
