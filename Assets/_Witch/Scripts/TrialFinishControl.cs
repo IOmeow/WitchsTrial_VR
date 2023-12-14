@@ -29,10 +29,6 @@ public class TrialFinishControl : MonoBehaviour
         ShowMethod(state);
     }
 
-    public void StartMethod(){
-        ShowMethod(state);
-    }
-
     public void ChangeState(bool isGood)
     {
         if(isGood)state--;
