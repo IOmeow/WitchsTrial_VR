@@ -6,7 +6,7 @@ public class TrialControl : MonoBehaviour
 {
     private GameObject[] context;
     private int page = -1;
-    private GameObject change_c;
+    private GameObject change_c, page_hint;
 
     void Awake()
     {
@@ -19,6 +19,7 @@ public class TrialControl : MonoBehaviour
         ShowPage(page);
 
         change_c = GameObject.Find("changePage");
+        page_hint = GameObject.Find("TurnPageHint");
     }
 
     public void ChangePage()
@@ -32,6 +33,7 @@ public class TrialControl : MonoBehaviour
         if (page == context.Length-1){
             Debug.Log("projection finish");
             change_c.SetActive(false);
+            page_hint.SetActive(false);
             GameManager.instance.startToTrial();
             page++;
         }
@@ -50,6 +52,8 @@ public class TrialControl : MonoBehaviour
 
     public void CanChangePage(){
         change_c.SetActive(true);
+        page_hint.SetActive(true);
+        page_hint.GetComponent<MeshRenderer>().enabled = true;
     }
     public void EndPage(){
         ShowPage(-1);

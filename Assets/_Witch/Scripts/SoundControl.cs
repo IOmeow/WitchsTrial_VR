@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class SoundControl : MonoBehaviour
 {
+    public static SoundControl instance { get; private set; }
     public AudioSource SE, BGM;
     public AudioClip magicSE, envelopeSE, potSE, flySE;
+    public AudioClip bellSE, doorSE, chalkSE, frameSE, frameReverseSE;
     public List<AudioClip> output = new List<AudioClip>();
     public List<AudioClip> bgm = new List<AudioClip>();
 
+    void Start(){
+        instance = this;
+    }
     public void playMagigSE(){
         SE.PlayOneShot(magicSE);
     }
@@ -46,6 +51,21 @@ public class SoundControl : MonoBehaviour
     }
     void _playBGM(){
         BGM.Play();
+    }
+
+    public void playBellSE(){
+        SE.PlayOneShot(bellSE);
+    }
+
+    public void playDoorSE(){
+        SE.PlayOneShot(doorSE);
+    }
+    public void playChalkSE(){
+        SE.PlayOneShot(chalkSE);
+    }
+    public void playFrameSE(bool isGood){
+        if(isGood)SE.PlayOneShot(frameReverseSE);
+        else SE.PlayOneShot(frameSE);
     }
 
     private static IEnumerator FadeMusic(AudioSource audioSource, float duration, float targetVolume){

@@ -8,15 +8,19 @@ public class GameManager : MonoBehaviour
     public bool debug = true;
     public float score = 0f;
     public float score1 = 0f, score2 = 0f;
+    public bool tutorial = true;
 
     MagicController magic;
     ProjectionControl projection;
     GameObject hint;
     GameObject SceneCorridor, SceneClassroom;
     GameObject black_board;
+    GameObject magic_stick;
 
     TrialControl trial1, trial2, ending;
     TrialFinishControl frame, file;
+
+    NPCAnimation npc;
 
     void Start()
     {
@@ -39,12 +43,16 @@ public class GameManager : MonoBehaviour
 
         frame = GameObject.Find("frame").GetComponent<TrialFinishControl>();
         file = GameObject.Find("file").GetComponent<TrialFinishControl>();
+        magic_stick = GameObject.Find("MagicStick");
+
+        npc = GameObject.Find("NPC").GetComponent<NPCAnimation>();
     }
 
     int magic_counter=0;  //0:tutorial
 
     // 到教室場景
     public void toClassrom(){
+        magic_stick.SetActive(false);
         Invoke("fadeToStart", 3f);
     }
     void fadeToStart(){
@@ -56,6 +64,25 @@ public class GameManager : MonoBehaviour
         SceneClassroom.transform.position = Vector3.zero;
         OVRScreenFade.instance.FadeIn();
         black_board.transform.GetChild(0).gameObject.SetActive(true);
+        VoiceOverControl.instance.playTutorial(0, true);
+        npc.animateStart();
+        Invoke("npcToBlackboard", 3f);
+        
+    }
+    void npcToBlackboard(){
+        npc.toBlackBoard();
+    }
+
+    public void ShowEmotionWord(){
+        SoundControl.instance.playChalkSE();
+        black_board.transform.GetChild(0).gameObject.SetActive(false);
+        black_board.transform.GetChild(1).gameObject.SetActive(true);
+    }
+
+    public void ActiveMagicStick(){
+        magic_stick.SetActive(true);
+        black_board.transform.GetChild(1).gameObject.SetActive(false);
+        black_board.transform.GetChild(2).gameObject.SetActive(true);
     }
 
     // 拿起法杖
@@ -63,29 +90,38 @@ public class GameManager : MonoBehaviour
     public void pickUp(){
         if(picked)return;
         picked = true;
-        black_board.transform.GetChild(0).gameObject.SetActive(false);
-        black_board.transform.GetChild(1).gameObject.SetActive(true);
+        black_board.transform.GetChild(2).gameObject.SetActive(false);
+        black_board.transform.GetChild(3).gameObject.SetActive(true);
         magic.startHint();
+        VoiceOverControl.instance.playTutorial(2, false);
     }
     void finishTutorial(){
-        black_board.transform.GetChild(1).gameObject.SetActive(false);
-        black_board.transform.GetChild(2).gameObject.SetActive(true);
+        black_board.transform.GetChild(4).gameObject.SetActive(false);
+        black_board.transform.GetChild(5).gameObject.SetActive(true);
         
         projection.OpenProjection();
         Invoke("startTrial1", 10f);
+        VoiceOverControl.instance.playTutorial(5, false);
+        tutorial = false;
+
+        npc.returnFromBlackBoard();
     }
 
     public void startToTrial(){
         switch(magic_counter){
         case 1:
             frame.StartMethod();    // 相框出現
+            VoiceOverControl.instance.startMurmur();
             break; 
         case 2:
+            VoiceOverControl.instance.startMurmur();
             break;
         case 3:
             file.StartMethod();     // 文件出現
+            VoiceOverControl.instance.startMurmur();
             break;
         case 4:
+            VoiceOverControl.instance.startMurmur();
             break;
         default:
             break;
@@ -100,11 +136,13 @@ public class GameManager : MonoBehaviour
             break;
         case 1:
             frame.ChangeState(score>0);
+            SoundControl.instance.playFrameSE(score>0);
             score1+=score;
             Invoke("startToTrial", 10f);
             break; 
         case 2:
             frame.ChangeState(score>0);
+            SoundControl.instance.playFrameSE(score>0);
             score1+=score;
             Invoke("startTrial2", 10f);
             break;
@@ -125,7 +163,8 @@ public class GameManager : MonoBehaviour
     }
 
     void startTrial1(){
-        black_board.transform.GetChild(2).gameObject.SetActive(false);
+        black_board.transform.GetChild(5).gameObject.SetActive(false);
+        black_board.transform.GetChild(0).gameObject.SetActive(true);
 
         Debug.Log("Trial1 start");
         trial1.ChangePage();

@@ -19,6 +19,7 @@ public class DoorControl : MonoBehaviour
         Debug.Log("Open Door");
         Destroy(grab);
         animator.SetBool("open", true);
+        SoundControl.instance.playDoorSE();
         GameManager.instance.toClassrom();
     }
 }

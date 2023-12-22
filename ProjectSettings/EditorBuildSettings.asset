@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/_Witch/Witch_start.unity
     guid: 6f5df62255d820e499ea5cb9b51e0fff
   - enabled: 1
-    path: Assets/_Witch/Witch.unity
+    path: Assets/_Witch/Witch/Witch.unity
     guid: 184ce2a53194a0c4b9ed4c464e69d267
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: bfa1182bd221b4ca89619141f66f1260, type: 2}

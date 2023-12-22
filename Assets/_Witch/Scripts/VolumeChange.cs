@@ -25,14 +25,14 @@ public class VolumeChange : MonoBehaviour {
         CancelInvoke("changeVolume");
         CancelInvoke("setVolume");
         ball.SetActive(false);
-        Debug.Log("Stop Volume");
+        // Debug.Log("Stop Volume");
         // 加動畫中止
         triangle.SetActive(false);
     }
     public void endVolume(){
         CancelInvoke("changeVolume");
         ball.SetActive(false);
-        Debug.Log("End Volume");
+        // Debug.Log("End Volume");
         // 加結束施法的動畫
     }
 

@@ -13,6 +13,7 @@ public class MagicController : MonoBehaviour
     GameObject hint, track, target;
     SoundControl sound;
     VolumeChange volume;
+    GameObject black_board;
     // Start is called before the first frame update
     void Awake()
     {
@@ -31,6 +32,10 @@ public class MagicController : MonoBehaviour
         target = GameObject.Find("StayTarget");
 
         volume = GameObject.Find("volume_hint").GetComponent<VolumeChange>();
+    }
+
+    void Start(){
+        black_board = GameObject.Find("black_board_context");
     }
 
     // Update is called once per frame
@@ -61,6 +66,7 @@ public class MagicController : MonoBehaviour
             Invoke("ResetTrack", 10);
             Debug.Log("track1");
             trail.SetActive(true);
+            hint.SetActive(false);
         }
         // if(other.name == "track2" && t==1){
         //     t=2;
@@ -76,6 +82,7 @@ public class MagicController : MonoBehaviour
         // }
         if(other.name == "StayTarget" && t==1 && !MagicStart){
             // 倒數3秒後startMagic
+            VoiceOverControl.instance.stopMurmur();
             Invoke("startMagic", 3f);
             volume.startVolume();
             t=2;
@@ -109,6 +116,11 @@ public class MagicController : MonoBehaviour
     void startMagic(){
         MagicStart = true;
         speech.startRecord();
+        if(GameManager.instance.tutorial){
+            VoiceOverControl.instance.playTutorial(3, false);
+            black_board.transform.GetChild(3).gameObject.SetActive(false);
+            black_board.transform.GetChild(4).gameObject.SetActive(true);
+        }
 
         glow.Play();
         sound.playMagigSE();
