@@ -46,9 +46,8 @@ public class SpeechControl : MonoBehaviour
                 ResetRecord();
 
                 // 失敗音效+提示
-                if(GameManager.instance.tutorial){
-                   VoiceOverControl.instance.playTutorial(4, false);
-                }
+                VoiceOverControl.instance.playTutorial(4, false);
+                
                 magic.startHint();
                 volume.stopVolume();
             }

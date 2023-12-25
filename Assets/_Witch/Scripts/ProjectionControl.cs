@@ -16,5 +16,6 @@ public class ProjectionControl : MonoBehaviour
     public void OpenProjection(){
         Debug.Log("Open Projectoin");
         animator.SetBool("open", true);
+        SoundControl.instance.playProjectionSE();
     }
 }

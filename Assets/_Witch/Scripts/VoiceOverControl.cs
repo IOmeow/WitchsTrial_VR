@@ -25,7 +25,7 @@ public class VoiceOverControl : MonoBehaviour
     }
 
     public void startMurmur(){
-        InvokeRepeating("playMurmur", 20f, 10f);
+        InvokeRepeating("playMurmur", 25f, 10f);
     }
     public void stopMurmur(){
         CancelInvoke("playMurmur");
@@ -49,6 +49,9 @@ public class VoiceOverControl : MonoBehaviour
             // 魔杖出現
             GameManager.instance.ActiveMagicStick();
             break;
+        case 2:
+            GameManager.instance.canStartMagic();
+            break;
         default:
             break;
         }
@@ -66,15 +69,22 @@ public class VoiceOverControl : MonoBehaviour
     {
         Debug.Log("音檔播放完畢！");
         switch(trial_index){
-        case 4:
-            // 試煉結果
+        case 0:
+            playTrial(2,false);
+            break;
+        case 1:
+            playTrial(2,false);
             break;
         case 5:
+        case 6:
+        case 7:
             // 鐘聲
             SoundControl.instance.playBellSE();
+            playTrial(8, true);
             break;
-        case 6:
+        case 8:
             // End game
+
             break;
         default:
             break;

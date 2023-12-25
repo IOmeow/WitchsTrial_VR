@@ -59,7 +59,17 @@ public class TrialControl : MonoBehaviour
         ShowPage(-1);
     }
 
-    public void PlaySlide(){     // 如果要自動播可以加
+    public void PlayEndSlide(int end){
+        StartCoroutine(ShowPagesWithDelay(end));
+    }
+
+    IEnumerator ShowPagesWithDelay(int end)
+    {
         ShowPage(0);
+        // 加音效
+        yield return new WaitForSeconds(10f);
+
+        ShowPage(end + 1);
+        VoiceOverControl.instance.playTrial(end+5, true);
     }
 }

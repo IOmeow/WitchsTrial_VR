@@ -7,7 +7,7 @@ public class SoundControl : MonoBehaviour
     public static SoundControl instance { get; private set; }
     public AudioSource SE, BGM;
     public AudioClip magicSE, envelopeSE, potSE, flySE;
-    public AudioClip bellSE, doorSE, chalkSE, frameSE, frameReverseSE;
+    public AudioClip projectionSE, bellSE, doorSE, chalkSE, frameSE, frameReverseSE, fileSE, fileReverseSE;
     public List<AudioClip> output = new List<AudioClip>();
     public List<AudioClip> bgm = new List<AudioClip>();
 
@@ -42,17 +42,35 @@ public class SoundControl : MonoBehaviour
     }
 
     public void playBGM(int scene){
+        StartCoroutine(FadeOutAndInBGM(scene));
+    }
+    IEnumerator FadeOutAndInBGM(int scene)
+    {
+        while (BGM.volume > 0)
+        {
+            BGM.volume -= Time.deltaTime / 2; // 調整淡出速度，可以根據需求調整
+            yield return null;
+        }
+
+        // 暫停並更換音樂
         BGM.Pause();
-        Invoke("playFlySE", 3f);
+        BGM.clip = bgm[scene];
 
-        BGM.clip = bgm[scene-1];
-        Invoke("_playBGM", 5f);
-        Debug.Log("bgm"+scene);
-    }
-    void _playBGM(){
+        // 淡入
+        while (BGM.volume < 0.2)
+        {
+            BGM.volume += Time.deltaTime / 2; // 調整淡入速度，可以根據需求調整
+            yield return null;
+        }
+
+        // 播放音樂
         BGM.Play();
+        Debug.Log("BGM switched to scene " + scene);
     }
 
+    public void playProjectionSE(){
+        SE.PlayOneShot(projectionSE);
+    }
     public void playBellSE(){
         SE.PlayOneShot(bellSE);
     }
@@ -66,6 +84,10 @@ public class SoundControl : MonoBehaviour
     public void playFrameSE(bool isGood){
         if(isGood)SE.PlayOneShot(frameReverseSE);
         else SE.PlayOneShot(frameSE);
+    }
+    public void playFileSE(bool isGood){
+        if(isGood)SE.PlayOneShot(fileReverseSE);
+        else SE.PlayOneShot(fileSE);
     }
 
     private static IEnumerator FadeMusic(AudioSource audioSource, float duration, float targetVolume){

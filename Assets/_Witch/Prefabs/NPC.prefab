@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1213889906844965365}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.781, y: 1.068, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -145,14 +145,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tutorial:
-  - {fileID: 8300000, guid: abd629d114dc1034eb5d55a211dbc40c, type: 3}
-  - {fileID: 8300000, guid: 8a23499b9d3c3674bb9b2d96d7c4247f, type: 3}
-  - {fileID: 8300000, guid: c5dc8da9f45ad584f8110506ba0a84c7, type: 3}
-  - {fileID: 8300000, guid: 2a2474ad07e35bb4f8091c8e88f9f3c0, type: 3}
-  - {fileID: 8300000, guid: cb9b1e1d3a253b94db988504003a534f, type: 3}
-  - {fileID: 8300000, guid: be180d2f47963f84f9b23d1e281d4354, type: 3}
-  murmur: []
-  trial: []
+  - {fileID: 8300000, guid: c4b64680db05e7046be0d30f0ed6636a, type: 3}
+  - {fileID: 8300000, guid: ca28f4e0186f63745b1a2fe85415f5fa, type: 3}
+  - {fileID: 8300000, guid: bc034db367555814a829729d2dbd9d4b, type: 3}
+  - {fileID: 8300000, guid: e9b8d89ccd0a2784f81375e3bf4cc226, type: 3}
+  - {fileID: 8300000, guid: 5a089652ea95b3847aeb034efb91617d, type: 3}
+  - {fileID: 8300000, guid: 47313767e2cbeee499f66cdac59f48a9, type: 3}
+  murmur:
+  - {fileID: 8300000, guid: 9f81e6f1882e2f5468342580333fb25d, type: 3}
+  - {fileID: 8300000, guid: e56ad374417aa57479a9b24c11f36928, type: 3}
+  - {fileID: 8300000, guid: 345a7e1a850425042a7aabbd0c6fc7d7, type: 3}
+  - {fileID: 8300000, guid: d15557e143447ed4081d7954b018f052, type: 3}
+  - {fileID: 8300000, guid: 0a762a6421b9c7440b276f4b1de2f991, type: 3}
+  - {fileID: 8300000, guid: c4cce5da06c06834f8edaca5faf5a036, type: 3}
+  - {fileID: 8300000, guid: 1e6de450f53e0224ea2dceded9ee5254, type: 3}
+  - {fileID: 8300000, guid: d84868a1f6238da429f8ebc2bf35f744, type: 3}
+  trial:
+  - {fileID: 8300000, guid: aac8c932c9bf2234e92df2605b58c612, type: 3}
+  - {fileID: 8300000, guid: 8dbe8a4a8cb0f344d8cc19f3b0616db4, type: 3}
+  - {fileID: 8300000, guid: 047bc521d6a698848bbf3c442264d492, type: 3}
+  - {fileID: 8300000, guid: 54cb52c2638f3454cabbaf65ea57556e, type: 3}
+  - {fileID: 8300000, guid: fddee09f5a89aff4ba47f71748c44dfe, type: 3}
+  - {fileID: 8300000, guid: 4201ed34812ad84499c2e5330ac140f4, type: 3}
+  - {fileID: 8300000, guid: 2427ad4da85900542a075ce138bb33f0, type: 3}
+  - {fileID: 8300000, guid: 7cbc2226760f2504fa0ca0365ca6be45, type: 3}
+  - {fileID: 8300000, guid: cf2bf445ea51d244684bff363208da82, type: 3}
+  - {fileID: 8300000, guid: fc3dc11505de05e4c91c62f679e366af, type: 3}
 --- !u!95 &7063834707486805188
 Animator:
   serializedVersion: 5

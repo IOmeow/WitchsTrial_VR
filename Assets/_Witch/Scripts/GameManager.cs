@@ -16,11 +16,14 @@ public class GameManager : MonoBehaviour
     GameObject SceneCorridor, SceneClassroom;
     GameObject black_board;
     GameObject magic_stick;
+    GameObject classroom_light;
 
     TrialControl trial1, trial2, ending;
     TrialFinishControl frame, file;
 
     NPCAnimation npc;
+
+    LightControl light;
 
     void Start()
     {
@@ -46,6 +49,11 @@ public class GameManager : MonoBehaviour
         magic_stick = GameObject.Find("MagicStick");
 
         npc = GameObject.Find("NPC").GetComponent<NPCAnimation>();
+
+        classroom_light = GameObject.Find("env_light").transform.GetChild(0).gameObject;
+        classroom_light.SetActive(false);
+
+        light = GameObject.Find("CenterEyeAnchor").GetComponent<LightControl>();
     }
 
     int magic_counter=0;  //0:tutorial
@@ -62,11 +70,12 @@ public class GameManager : MonoBehaviour
     void gameStart(){
         SceneCorridor.transform.position = new Vector3(5000f, 0f,0f);
         SceneClassroom.transform.position = Vector3.zero;
+        classroom_light.SetActive(true);
         OVRScreenFade.instance.FadeIn();
         black_board.transform.GetChild(0).gameObject.SetActive(true);
         VoiceOverControl.instance.playTutorial(0, true);
         npc.animateStart();
-        Invoke("npcToBlackboard", 3f);
+        Invoke("npcToBlackboard", 15f);
         
     }
     void npcToBlackboard(){
@@ -92,8 +101,7 @@ public class GameManager : MonoBehaviour
         picked = true;
         black_board.transform.GetChild(2).gameObject.SetActive(false);
         black_board.transform.GetChild(3).gameObject.SetActive(true);
-        magic.startHint();
-        VoiceOverControl.instance.playTutorial(2, false);
+        VoiceOverControl.instance.playTutorial(2, true);
     }
     void finishTutorial(){
         black_board.transform.GetChild(4).gameObject.SetActive(false);
@@ -106,21 +114,29 @@ public class GameManager : MonoBehaviour
 
         npc.returnFromBlackBoard();
     }
+    public void canStartMagic(){
+        magic.startHint();
+        VoiceOverControl.instance.startMurmur();
+    }
 
     public void startToTrial(){
         switch(magic_counter){
         case 1:
             frame.StartMethod();    // 相框出現
+            VoiceOverControl.instance.playTrial(0, true);
             VoiceOverControl.instance.startMurmur();
             break; 
         case 2:
+            VoiceOverControl.instance.playTrial(9, false);
             VoiceOverControl.instance.startMurmur();
             break;
         case 3:
             file.StartMethod();     // 文件出現
+            VoiceOverControl.instance.playTrial(1, true);
             VoiceOverControl.instance.startMurmur();
             break;
         case 4:
+            VoiceOverControl.instance.playTrial(9, false);
             VoiceOverControl.instance.startMurmur();
             break;
         default:
@@ -148,18 +164,25 @@ public class GameManager : MonoBehaviour
             break;
         case 3:
             file.ChangeState(score<0);
+            SoundControl.instance.playFileSE(score<0);
             score2+=score;
             Invoke("startToTrial", 10f);
             break;
         case 4:
             file.ChangeState(score<0);
+            SoundControl.instance.playFileSE(score<0);
             score2+=score;
             Invoke("startEnd", 10f);
             break;
         default:
             break;
         }
+        light.ChangeLight(score>0);
+        Invoke("stopLight", 10f);
         magic_counter++;
+    }
+    void stopLight(){
+        light.ResetLigt();
     }
 
     void startTrial1(){
@@ -169,12 +192,17 @@ public class GameManager : MonoBehaviour
         Debug.Log("Trial1 start");
         trial1.ChangePage();
         trial1.CanChangePage();
+
+        SoundControl.instance.playBGM(0);
     }
     void startTrial2(){
         trial1.EndPage();
+        VoiceOverControl.instance.playTrial(3, false);
         Debug.Log("Trial2 start");
         trial2.ChangePage();
         trial2.CanChangePage();
+
+        SoundControl.instance.playBGM(1);
     }
 
     public void ChangePage(){
@@ -182,9 +210,15 @@ public class GameManager : MonoBehaviour
         if(magic_counter==3)trial2.ChangePage();
     }
 
+    public int final_score = 0;
     void startEnd(){
         trial2.EndPage();
+        VoiceOverControl.instance.playTrial(4, false);
         Debug.Log("Ending");
-        ending.PlaySlide();
+        if(score1>0)final_score++;
+        if(score2<0)final_score++;
+        ending.PlayEndSlide(final_score);
+
+        SoundControl.instance.playBGM(2);
     }
 }
