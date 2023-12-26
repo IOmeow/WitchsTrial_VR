@@ -4,6 +4,7 @@ public class VolumeChange : MonoBehaviour {
 
     AudioRecorder AudioRecorder;
     GameObject ball, triangle;
+    public Transform targetObject;
     void Start(){
         AudioRecorder = GameObject.Find("SpeechControl").GetComponent<AudioRecorder>();
         
@@ -18,7 +19,7 @@ public class VolumeChange : MonoBehaviour {
         InvokeRepeating("changeVolume", 3f, 0.1f);
         Invoke("setVolume", 3f);
         Debug.Log("Start Countdown 3s");
-        // 加倒數3秒的動畫
+        // 倒數3秒的動畫
         triangle.SetActive(true);
     }
     public void stopVolume(){
@@ -45,6 +46,8 @@ public class VolumeChange : MonoBehaviour {
     }
     void setVolume(){
         triangle.SetActive(false);
+        // 換位置
+        this.transform.position = targetObject.position;
         ball.SetActive(true);
     }
 }

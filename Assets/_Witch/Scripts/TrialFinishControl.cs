@@ -5,15 +5,17 @@ using UnityEngine;
 public class TrialFinishControl : MonoBehaviour
 {
     private GameObject[] context;
+    private ParticleSystem effect;
     private int state = 2;
 
     void Start()
     {
-        context = new GameObject[transform.childCount];
-        for (int i = 0; i < transform.childCount; i++)
+        context = new GameObject[transform.childCount-1];
+        for (int i = 0; i < transform.childCount-1; i++)
         {
             context[i] = transform.GetChild(i).gameObject;
         }
+        effect = transform.GetChild(transform.childCount-1).gameObject.GetComponent<ParticleSystem>();
         ShowMethod(-1);
     }
 
@@ -26,11 +28,14 @@ public class TrialFinishControl : MonoBehaviour
     }
 
     public void StartMethod(){
+        effect.Play();
         ShowMethod(state);
     }
 
     public void ChangeState(bool isGood)
     {
+        effect.Play();
+
         if(isGood)state--;
         else state++;
 

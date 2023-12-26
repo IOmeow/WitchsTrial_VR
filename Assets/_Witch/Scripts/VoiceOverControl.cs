@@ -41,9 +41,7 @@ public class VoiceOverControl : MonoBehaviour
         Debug.Log("音檔播放完畢！");
         switch(tutorial_index){
         case 0:
-            // 黑板浮現情緒句子
-            GameManager.instance.ShowEmotionWord();
-            Invoke("delayToPlayTutorial", 5f);
+            Invoke("delayToPlayTutorial", 0.1f);
             break;
         case 1:
             // 魔杖出現
@@ -51,6 +49,10 @@ public class VoiceOverControl : MonoBehaviour
             break;
         case 2:
             GameManager.instance.canStartMagic();
+            break;
+        case 5:
+            // 黑板浮現情緒句子
+            GameManager.instance.ShowEmotionWord();
             break;
         default:
             break;
@@ -67,7 +69,7 @@ public class VoiceOverControl : MonoBehaviour
     }
     void OnTrialAudioFinished()
     {
-        Debug.Log("音檔播放完畢！");
+        // Debug.Log("音檔播放完畢！");
         switch(trial_index){
         case 0:
             playTrial(2,false);

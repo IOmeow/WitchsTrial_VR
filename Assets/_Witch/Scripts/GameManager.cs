@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     NPCAnimation npc;
 
     LightControl light;
+    ParticleSystem magic_particle;
 
     void Start()
     {
@@ -54,6 +55,7 @@ public class GameManager : MonoBehaviour
         classroom_light.SetActive(false);
 
         light = GameObject.Find("CenterEyeAnchor").GetComponent<LightControl>();
+        magic_particle = GameObject.Find("Magicshow").GetComponent<ParticleSystem>();
     }
 
     int magic_counter=0;  //0:tutorial
@@ -72,26 +74,17 @@ public class GameManager : MonoBehaviour
         SceneClassroom.transform.position = Vector3.zero;
         classroom_light.SetActive(true);
         OVRScreenFade.instance.FadeIn();
-        black_board.transform.GetChild(0).gameObject.SetActive(true);
         VoiceOverControl.instance.playTutorial(0, true);
         npc.animateStart();
         Invoke("npcToBlackboard", 15f);
-        
     }
     void npcToBlackboard(){
         npc.toBlackBoard();
     }
 
-    public void ShowEmotionWord(){
-        SoundControl.instance.playChalkSE();
-        black_board.transform.GetChild(0).gameObject.SetActive(false);
-        black_board.transform.GetChild(1).gameObject.SetActive(true);
-    }
-
     public void ActiveMagicStick(){
         magic_stick.SetActive(true);
-        black_board.transform.GetChild(1).gameObject.SetActive(false);
-        black_board.transform.GetChild(2).gameObject.SetActive(true);
+        black_board.transform.GetChild(0).gameObject.SetActive(true);
     }
 
     // 拿起法杖
@@ -99,20 +92,27 @@ public class GameManager : MonoBehaviour
     public void pickUp(){
         if(picked)return;
         picked = true;
-        black_board.transform.GetChild(2).gameObject.SetActive(false);
-        black_board.transform.GetChild(3).gameObject.SetActive(true);
+        black_board.transform.GetChild(0).gameObject.SetActive(false);
+        black_board.transform.GetChild(1).gameObject.SetActive(true);
         VoiceOverControl.instance.playTutorial(2, true);
     }
     void finishTutorial(){
-        black_board.transform.GetChild(4).gameObject.SetActive(false);
-        black_board.transform.GetChild(5).gameObject.SetActive(true);
-        
-        projection.OpenProjection();
-        Invoke("startTrial1", 10f);
-        VoiceOverControl.instance.playTutorial(5, false);
+        VoiceOverControl.instance.playTutorial(5, true);
         tutorial = false;
+    }
+    public void ShowEmotionWord(){
+        black_board.transform.GetChild(2).gameObject.SetActive(false);
+        black_board.transform.GetChild(3).gameObject.SetActive(true);
+        SoundControl.instance.playChalkSE();
+        Invoke("toStartTrial", 5f);
+    }
+    void toStartTrial(){
+        black_board.transform.GetChild(3).gameObject.SetActive(false);
+        black_board.transform.GetChild(4).gameObject.SetActive(true);
+        VoiceOverControl.instance.playTutorial(6, false);
 
-        npc.returnFromBlackBoard();
+        projection.OpenProjection();
+        Invoke("startTrial1", 3f);
     }
     public void canStartMagic(){
         magic.startHint();
@@ -177,18 +177,21 @@ public class GameManager : MonoBehaviour
         default:
             break;
         }
-        light.ChangeLight(score>0);
+        light.ChangeLight(score>=0);
         Invoke("stopLight", 10f);
+        magic_particle.Play();
         magic_counter++;
     }
     void stopLight(){
         light.ResetLigt();
+        magic_particle.Stop();
     }
 
     void startTrial1(){
-        black_board.transform.GetChild(5).gameObject.SetActive(false);
-        black_board.transform.GetChild(0).gameObject.SetActive(true);
-
+        black_board.transform.GetChild(4).gameObject.SetActive(false);
+        black_board.transform.GetChild(5).gameObject.SetActive(true);
+        npc.returnFromBlackBoard();
+        
         Debug.Log("Trial1 start");
         trial1.ChangePage();
         trial1.CanChangePage();

@@ -118,8 +118,8 @@ public class MagicController : MonoBehaviour
         speech.startRecord();
         if(GameManager.instance.tutorial){
             VoiceOverControl.instance.playTutorial(3, false);
-            black_board.transform.GetChild(3).gameObject.SetActive(false);
-            black_board.transform.GetChild(4).gameObject.SetActive(true);
+            black_board.transform.GetChild(1).gameObject.SetActive(false);
+            black_board.transform.GetChild(2).gameObject.SetActive(true);
         }
 
         glow.Play();

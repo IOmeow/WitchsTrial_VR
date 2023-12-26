@@ -151,6 +151,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e9b8d89ccd0a2784f81375e3bf4cc226, type: 3}
   - {fileID: 8300000, guid: 5a089652ea95b3847aeb034efb91617d, type: 3}
   - {fileID: 8300000, guid: 47313767e2cbeee499f66cdac59f48a9, type: 3}
+  - {fileID: 8300000, guid: 03e0a7bf06d27894980612b22d8afd47, type: 3}
   murmur:
   - {fileID: 8300000, guid: 9f81e6f1882e2f5468342580333fb25d, type: 3}
   - {fileID: 8300000, guid: e56ad374417aa57479a9b24c11f36928, type: 3}
@@ -5091,8 +5092,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1749387576261894664}
   m_Father: {fileID: 8383539954570576938}

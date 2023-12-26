@@ -17,7 +17,6 @@ public class change_page : MonoBehaviour
             GameManager.instance.ChangePage();
             stick = other;
             stick.isTrigger = false;
-            GetComponent<SphereCollider>().isTrigger = false;
             CancelInvoke("openHint");
             Invoke("openCollider", 3f);
             page_hint.enabled = false;
@@ -26,7 +25,6 @@ public class change_page : MonoBehaviour
 
     void openCollider(){
         stick.isTrigger = true;
-        GetComponent<SphereCollider>().isTrigger = true;
         Invoke("openHint", 3f);
     }
 
