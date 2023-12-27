@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public float score = 0f;
     public float score1 = 0f, score2 = 0f;
     public bool tutorial = true;
+    public bool lookAtSlide  = false;
 
     MagicController magic;
     ProjectionControl projection;
@@ -25,6 +26,8 @@ public class GameManager : MonoBehaviour
 
     LightControl light;
     ParticleSystem magic_particle;
+
+    GameObject door_hint;
 
     void Start()
     {
@@ -56,12 +59,21 @@ public class GameManager : MonoBehaviour
 
         light = GameObject.Find("CenterEyeAnchor").GetComponent<LightControl>();
         magic_particle = GameObject.Find("Magicshow").GetComponent<ParticleSystem>();
+
+        door_hint = GameObject.Find("OpenDoorHint");
+        door_hint.SetActive(false);
+        Invoke("showOpenDoorHint", 10f);
+    }
+    void showOpenDoorHint(){
+        door_hint.SetActive(true);
     }
 
     int magic_counter=0;  //0:tutorial
 
     // 到教室場景
     public void toClassrom(){
+        CancelInvoke("showOpenDoorHint");
+        door_hint.SetActive(false);
         magic_stick.SetActive(false);
         Invoke("fadeToStart", 3f);
     }

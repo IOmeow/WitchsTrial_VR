@@ -20,6 +20,7 @@ public class TrialControl : MonoBehaviour
 
         change_c = GameObject.Find("changePage");
         page_hint = GameObject.Find("TurnPageHint");
+        change_c.GetComponent<BoxCollider>().enabled = false;
     }
 
     public void ChangePage()
@@ -32,7 +33,7 @@ public class TrialControl : MonoBehaviour
 
         if (page == context.Length-1){
             Debug.Log("projection finish");
-            change_c.SetActive(false);
+            change_c.GetComponent<BoxCollider>().enabled = false;
             page_hint.SetActive(false);
             GameManager.instance.startToTrial();
             page++;
@@ -51,10 +52,17 @@ public class TrialControl : MonoBehaviour
     }
 
     public void CanChangePage(){
-        change_c.SetActive(true);
+        StartCoroutine(WaitForlLookAtSlide());
+    }
+    IEnumerator WaitForlLookAtSlide()
+    {
+        yield return new WaitUntil(() => GameManager.instance.lookAtSlide == true);
+        
+        change_c.GetComponent<BoxCollider>().enabled = true;
         page_hint.SetActive(true);
         page_hint.GetComponent<MeshRenderer>().enabled = true;
     }
+
     public void EndPage(){
         ShowPage(-1);
     }

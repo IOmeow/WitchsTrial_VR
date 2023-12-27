@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class change_page : MonoBehaviour
@@ -5,7 +7,6 @@ public class change_page : MonoBehaviour
     private Collider stick;
     private MeshRenderer page_hint;
     void Start(){
-        gameObject.SetActive(false);
         page_hint = GameObject.Find("TurnPageHint").GetComponent<MeshRenderer>();
         page_hint.enabled = false;
     }
@@ -18,12 +19,22 @@ public class change_page : MonoBehaviour
             stick = other;
             stick.isTrigger = false;
             CancelInvoke("openHint");
-            Invoke("openCollider", 3f);
+            Invoke("openCollider", 2f);
             page_hint.enabled = false;
         }
     }
 
     void openCollider(){
+        if(gameObject.GetComponent<BoxCollider>().enabled == false){
+            stick.isTrigger = true;
+            Invoke("openHint", 3f);
+        }
+        else StartCoroutine(WaitForlLookAtSlide());
+    }
+    IEnumerator WaitForlLookAtSlide()
+    {
+        yield return new WaitUntil(() => GameManager.instance.lookAtSlide == true);
+        
         stick.isTrigger = true;
         Invoke("openHint", 3f);
     }
