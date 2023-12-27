@@ -68,8 +68,13 @@ public class TrialControl : MonoBehaviour
         ShowPage(0);
         // 加音效
         yield return new WaitForSeconds(10f);
-
-        ShowPage(end + 1);
+        if(end==0) ShowPage(1);
+        else if(end==1){
+            if(GameManager.instance.score1>0) ShowPage(2);
+            else ShowPage(3);
+        }
+        else ShowPage(4);
+        
         VoiceOverControl.instance.playTrial(end+5, true);
     }
 }

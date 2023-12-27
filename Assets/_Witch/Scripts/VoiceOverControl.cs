@@ -19,7 +19,11 @@ public class VoiceOverControl : MonoBehaviour
     }
     
     public void playTutorial(int index, bool recall){
-        voice.PlayOneShot(tutorial[index]);
+        if (voice.isPlaying) voice.Pause();
+        voice.clip = tutorial[index];
+        voice.Play();
+
+        // voice.PlayOneShot(tutorial[index]);
         tutorial_index = index;
         if(recall)Invoke("OnTutorialAudioFinished", tutorial[index].length);
     }
