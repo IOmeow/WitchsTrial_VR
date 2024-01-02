@@ -152,6 +152,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 5a089652ea95b3847aeb034efb91617d, type: 3}
   - {fileID: 8300000, guid: 47313767e2cbeee499f66cdac59f48a9, type: 3}
   - {fileID: 8300000, guid: 03e0a7bf06d27894980612b22d8afd47, type: 3}
+  - {fileID: 8300000, guid: af1d73c6f35449a4faa115f64651b09c, type: 3}
   murmur:
   - {fileID: 8300000, guid: 9f81e6f1882e2f5468342580333fb25d, type: 3}
   - {fileID: 8300000, guid: e56ad374417aa57479a9b24c11f36928, type: 3}
@@ -172,6 +173,15 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7cbc2226760f2504fa0ca0365ca6be45, type: 3}
   - {fileID: 8300000, guid: cf2bf445ea51d244684bff363208da82, type: 3}
   - {fileID: 8300000, guid: fc3dc11505de05e4c91c62f679e366af, type: 3}
+  story1:
+  - {fileID: 8300000, guid: 69d195c9ab782ae418e2d249541d7eef, type: 3}
+  - {fileID: 8300000, guid: d7350654728027c4db2cc7abbc3ec89e, type: 3}
+  - {fileID: 8300000, guid: 98f9fe016696d1143aa19fd21b3e9e49, type: 3}
+  story2:
+  - {fileID: 8300000, guid: d165f6fd9e779164a9eae022ce74c813, type: 3}
+  - {fileID: 8300000, guid: b43b12d7c768a2748b8015c80a171e0a, type: 3}
+  - {fileID: 8300000, guid: 01ec3c1b1eae01342aecb9b77322b6c6, type: 3}
+  finshAudio: 0
 --- !u!95 &7063834707486805188
 Animator:
   serializedVersion: 5

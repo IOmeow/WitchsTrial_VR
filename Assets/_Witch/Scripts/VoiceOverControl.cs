@@ -6,11 +6,15 @@ public class VoiceOverControl : MonoBehaviour
 {
     public static VoiceOverControl instance { get; private set; }
     private AudioSource voice;
+    [SerializeField]private AudioSource slide;
     public List<AudioClip> tutorial = new List<AudioClip>();
     public List<AudioClip> murmur = new List<AudioClip>();
     public List<AudioClip> trial = new List<AudioClip>();
+    public List<AudioClip> story1 = new List<AudioClip>();
+    public List<AudioClip> story2 = new List<AudioClip>();
 
     int mur_index=0, tutorial_index, trial_index;
+    public bool finshAudio = true;
 
     void Start()
     {
@@ -58,6 +62,9 @@ public class VoiceOverControl : MonoBehaviour
             // 黑板浮現情緒句子
             GameManager.instance.ShowEmotionWord();
             break;
+        case 6:
+            GameManager.instance.canChangeTrial1Page();
+            break;
         default:
             break;
         }
@@ -67,7 +74,8 @@ public class VoiceOverControl : MonoBehaviour
     }
 
     public void playTrial(int index, bool recall){
-        voice.PlayOneShot(trial[index]);
+        if(index==0||index==1)slide.PlayOneShot(trial[index]);
+        else voice.PlayOneShot(trial[index]);
         trial_index = index;
         if(recall)Invoke("OnTrialAudioFinished", trial[index].length);
     }
@@ -76,17 +84,19 @@ public class VoiceOverControl : MonoBehaviour
         // Debug.Log("音檔播放完畢！");
         switch(trial_index){
         case 0:
-            playTrial(2,false);
+            playTrial(2,true);
             break;
         case 1:
-            playTrial(2,false);
+            playTrial(2,true);
+            break;
+        case 2:
+            GameManager.instance.canStartMagic();
             break;
         case 5:
         case 6:
         case 7:
             // 鐘聲
-            SoundControl.instance.playBellSE();
-            playTrial(8, true);
+            Invoke("playEnding", 3f);
             break;
         case 8:
             // End game
@@ -96,5 +106,22 @@ public class VoiceOverControl : MonoBehaviour
             break;
         }
     }
-
+    void playEnding(){
+        SoundControl.instance.playBellSE();
+        playTrial(8, true);
+    }
+    public void playStory1(int index){
+        finshAudio=false;
+        slide.PlayOneShot(story1[index]);
+        Invoke("OnStoryAudioFinished", story1[index].length);
+    }
+    public void playStory2(int index){
+        finshAudio=false;
+        slide.PlayOneShot(story2[index]);
+        Invoke("OnStoryAudioFinished", story2[index].length);
+    }
+    void OnStoryAudioFinished(){
+        // 播完
+        finshAudio=true;
+    }
 }

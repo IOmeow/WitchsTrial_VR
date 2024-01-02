@@ -7,6 +7,7 @@ public class TrialControl : MonoBehaviour
     private GameObject[] context;
     private int page = -1;
     private GameObject change_c, page_hint;
+    private string name;
 
     void Awake()
     {
@@ -21,6 +22,7 @@ public class TrialControl : MonoBehaviour
         change_c = GameObject.Find("changePage");
         page_hint = GameObject.Find("TurnPageHint");
         change_c.GetComponent<BoxCollider>().enabled = false;
+        name=gameObject.name;
     }
 
     public void ChangePage()
@@ -29,6 +31,8 @@ public class TrialControl : MonoBehaviour
         else {
             page++;
             ShowPage(page);
+            if(name=="trial1"&&page>0&&page<context.Length-1)VoiceOverControl.instance.playStory1(page-1);
+            if(name=="trial2"&&page>0&&page<context.Length-1)VoiceOverControl.instance.playStory2(page-1);
         }
 
         if (page == context.Length-1){
@@ -74,8 +78,10 @@ public class TrialControl : MonoBehaviour
     IEnumerator ShowPagesWithDelay(int end)
     {
         ShowPage(0);
-        // 加音效
         yield return new WaitForSeconds(10f);
+        // 加音效
+        SoundControl.instance.playCountdownSE();
+        yield return new WaitForSeconds(3f);
         if(end==0) ShowPage(1);
         else if(end==1){
             if(GameManager.instance.score1>0) ShowPage(2);

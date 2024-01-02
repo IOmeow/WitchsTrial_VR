@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     public float score = 0f;
     public float score1 = 0f, score2 = 0f;
     public bool tutorial = true;
-    public bool lookAtSlide  = false;
+    public bool lookAtSlide  = false, lookAtBlackBoard = false;
 
     MagicController magic;
     ProjectionControl projection;
@@ -121,7 +121,7 @@ public class GameManager : MonoBehaviour
     void toStartTrial(){
         black_board.transform.GetChild(3).gameObject.SetActive(false);
         black_board.transform.GetChild(4).gameObject.SetActive(true);
-        VoiceOverControl.instance.playTutorial(6, false);
+        VoiceOverControl.instance.playTutorial(6, true);
 
         projection.OpenProjection();
         Invoke("startTrial1", 3f);
@@ -136,26 +136,24 @@ public class GameManager : MonoBehaviour
         case 1:
             frame.StartMethod();    // 相框出現
             VoiceOverControl.instance.playTrial(0, true);
-            VoiceOverControl.instance.startMurmur();
+            // VoiceOverControl.instance.startMurmur();
             break; 
         case 2:
             VoiceOverControl.instance.playTrial(9, false);
-            VoiceOverControl.instance.startMurmur();
+            canStartMagic();
             break;
         case 3:
             file.StartMethod();     // 文件出現
             VoiceOverControl.instance.playTrial(1, true);
-            VoiceOverControl.instance.startMurmur();
+            // VoiceOverControl.instance.startMurmur();
             break;
         case 4:
             VoiceOverControl.instance.playTrial(9, false);
-            VoiceOverControl.instance.startMurmur();
+            canStartMagic();
             break;
         default:
             break;
         }
-
-        magic.startHint();
     }
     public void endMagic(){
         switch(magic_counter){
@@ -205,14 +203,15 @@ public class GameManager : MonoBehaviour
         npc.returnFromBlackBoard();
         
         Debug.Log("Trial1 start");
+        SoundControl.instance.playBGM(0);
+    }
+    public void canChangeTrial1Page(){
         trial1.ChangePage();
         trial1.CanChangePage();
-
-        SoundControl.instance.playBGM(0);
     }
     void startTrial2(){
         trial1.EndPage();
-        VoiceOverControl.instance.playTrial(3, false);
+        // VoiceOverControl.instance.playTrial(3, false);
         Debug.Log("Trial2 start");
         trial2.ChangePage();
         trial2.CanChangePage();

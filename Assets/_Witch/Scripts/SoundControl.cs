@@ -7,7 +7,7 @@ public class SoundControl : MonoBehaviour
     public static SoundControl instance { get; private set; }
     public AudioSource SE, BGM;
     public AudioClip magicSE, envelopeSE, potSE, flySE;
-    public AudioClip projectionSE, bellSE, doorSE, chalkSE, frameSE, frameReverseSE, fileSE, fileReverseSE;
+    public AudioClip projectionSE, bellSE, doorSE, chalkSE, frameSE, frameReverseSE, fileSE, fileReverseSE, countdownSE;
     public List<AudioClip> output = new List<AudioClip>();
     public List<AudioClip> bgm = new List<AudioClip>();
 
@@ -80,6 +80,9 @@ public class SoundControl : MonoBehaviour
     }
     public void playChalkSE(){
         SE.PlayOneShot(chalkSE);
+    }
+    public void playCountdownSE(){
+        SE.PlayOneShot(countdownSE);
     }
     public void playFrameSE(bool isGood){
         if(isGood)SE.PlayOneShot(frameReverseSE);

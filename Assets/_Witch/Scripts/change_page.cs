@@ -19,15 +19,21 @@ public class change_page : MonoBehaviour
             stick = other;
             stick.isTrigger = false;
             CancelInvoke("openHint");
-            Invoke("openCollider", 2f);
+            // Invoke("openCollider", 2f);
             page_hint.enabled = false;
+            StartCoroutine(WaitForAudioFinish());
         }
+    }
+    IEnumerator WaitForAudioFinish()
+    {
+        yield return new WaitUntil(() => VoiceOverControl.instance.finshAudio == true);
+        openCollider();
     }
 
     void openCollider(){
         if(gameObject.GetComponent<BoxCollider>().enabled == false){
             stick.isTrigger = true;
-            Invoke("openHint", 3f);
+            Invoke("openHint", 2f);
         }
         else StartCoroutine(WaitForlLookAtSlide());
     }

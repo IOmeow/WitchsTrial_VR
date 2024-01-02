@@ -35,6 +35,7 @@ public class VolumeChange : MonoBehaviour {
         ball.SetActive(false);
         // Debug.Log("End Volume");
         // 加結束施法的動畫
+        CancelInvoke("voiceHint");
     }
 
     float volume;
@@ -49,5 +50,11 @@ public class VolumeChange : MonoBehaviour {
         // 換位置
         this.transform.position = targetObject.position;
         ball.SetActive(true);
+
+        //5s後提示
+        Invoke("voiceHint", 5f);
+    }
+    void voiceHint(){
+        VoiceOverControl.instance.playTutorial(7,false);
     }
 }

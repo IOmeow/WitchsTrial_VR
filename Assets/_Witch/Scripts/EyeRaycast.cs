@@ -12,11 +12,15 @@ public class EyeRaycast : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, maxRaycastDistance, methodLayer))
         {
-            GameManager.instance.lookAtSlide = true;
-            // Debug.Log(GameManager.instance.lookAtSlide);
+            if(hit.collider.gameObject.name=="Slide")GameManager.instance.lookAtSlide = true;
+            else GameManager.instance.lookAtSlide = false;
+
+            // if(hit.collider.gameObject.name=="black_board")GameManager.instance.lookAtBlackBoard = true;
+            // else GameManager.instance.lookAtBlackBoard = false;
         }
         else {
             GameManager.instance.lookAtSlide = false;
+            // GameManager.instance.lookAtBlackBoard = false;
         }
     }
 }
